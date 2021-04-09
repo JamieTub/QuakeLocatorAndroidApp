@@ -1,5 +1,7 @@
 package org.me.gcu.equakestartercode;
 
+//James Lawn S1918451
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -40,7 +42,7 @@ public class QuakeMapView extends Fragment implements OnMapReadyCallback {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle){
-        v = layoutInflater.inflate(R.layout.activity_quake_map, viewGroup, false);
+        v = layoutInflater.inflate(R.layout.frag_quake_map, viewGroup, false);
         backToQuakeList = (Button) v.findViewById(R.id.backToQuakeList);
         backToQuakeList.setOnClickListener(this::OnClick);
 
@@ -51,11 +53,12 @@ public class QuakeMapView extends Fragment implements OnMapReadyCallback {
     }
 
     private void OnClick(View view) {
-        Bundle bundle = new Bundle();
-        getParentFragmentManager().beginTransaction()
-            .setReorderingAllowed(true)
-            .replace(R.id.frameLayout, HomeFrag.class, bundle)
-            .commit();
+        ((MainActivity)getActivity()).startProgress();
+//        Bundle bundle = new Bundle();
+//        getParentFragmentManager().beginTransaction()
+//            .setReorderingAllowed(true)
+//            .replace(R.id.frameLayout, HomeFrag.class, bundle)
+//            .commit();
    }
 
     @Override

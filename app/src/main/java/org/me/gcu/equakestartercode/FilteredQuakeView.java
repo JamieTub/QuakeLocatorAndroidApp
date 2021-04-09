@@ -1,6 +1,7 @@
 package org.me.gcu.equakestartercode;
 
-import android.app.DatePickerDialog.OnDateSetListener;
+//James Lawn S1918451
+
 import android.app.DatePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +42,7 @@ public class FilteredQuakeView extends Fragment implements DatePickerDialog.OnDa
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle){
 
-        view = layoutInflater.inflate(R.layout.activity_quake_filter, viewGroup, false);
+        view = layoutInflater.inflate(R.layout.frag_quake_filter, viewGroup, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.filteredQuakes);
         LinearLayoutManager LLM = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(LLM);
@@ -61,6 +61,9 @@ public class FilteredQuakeView extends Fragment implements DatePickerDialog.OnDa
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void filterQuakes(View v) {
+
+
+
         if(filterStart == null || filterEnd == null || filterStart.isAfter(filterEnd)){
             Toast.makeText(view.getContext(), "Date range is not valid.", Toast.LENGTH_SHORT).show();
         }else{
@@ -72,20 +75,25 @@ public class FilteredQuakeView extends Fragment implements DatePickerDialog.OnDa
                 }
             }
 
-            filtered = filteredQuakes;
-            ArrayList<Earthquake> filteredEarthquakes = setFilteredValues();
-            FilteredQuakeListAdapter filteredQuakeListAdapter = new FilteredQuakeListAdapter(view.getContext(), filteredEarthquakes);
-            recyclerView.setAdapter(filteredQuakeListAdapter);
-
+            if(filteredQuakes.size() == 0){
+                Toast.makeText(view.getContext(), "No earthquakes found in date range.", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                filtered = filteredQuakes;
+                ArrayList<Earthquake> filteredEarthquakes = setFilteredValues();
+                FilteredQuakeListAdapter filteredQuakeListAdapter = new FilteredQuakeListAdapter(view.getContext(), filteredEarthquakes);
+                recyclerView.setAdapter(filteredQuakeListAdapter);
+            }
         }
     }
 
     private void backToQuakeList(View view) {
-        Bundle bundle = new Bundle();
-        getParentFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.frameLayout, HomeFrag.class, bundle)
-                .commit();
+        ((MainActivity)getActivity()).startProgress();
+//        Bundle bundle = new Bundle();
+//        getParentFragmentManager().beginTransaction()
+//                .setReorderingAllowed(true)
+//                .replace(R.id.frameLayout, HomeFrag.class, bundle)
+//                .commit();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

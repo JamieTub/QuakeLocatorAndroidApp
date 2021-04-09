@@ -1,5 +1,7 @@
 package org.me.gcu.equakestartercode;
 
+//James Lawn S1918451
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;

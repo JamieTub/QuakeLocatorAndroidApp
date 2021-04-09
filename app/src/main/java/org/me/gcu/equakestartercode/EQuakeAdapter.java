@@ -1,5 +1,7 @@
 package org.me.gcu.equakestartercode;
 
+//James Lawn S1918451
+
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;

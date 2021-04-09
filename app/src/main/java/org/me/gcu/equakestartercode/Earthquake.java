@@ -1,5 +1,7 @@
 package org.me.gcu.equakestartercode;
 
+//James Lawn S1918451
+
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
